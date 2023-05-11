@@ -15,14 +15,14 @@ export default function Login() {
         "user-read-recently-played",
         "user-top-read",
       ];
-      window.location.href = `${apiUrl}?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=${scope.join(
+  window.location.href = `${apiUrl}?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=${scope.join(
         " "
       )}&response_type=token&show_dialog=true`;
 };
   return (
    <Container>
     <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Black.png" alt="spotify" />
-    <button onClick={handleClick}>Connect Spoitfy </button>
+    <button onClick={handleClick}>Connect Spotify</button>
    </Container>
   )
 }

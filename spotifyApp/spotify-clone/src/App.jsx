@@ -1,7 +1,8 @@
 import React,{useEffect} from 'react';
-import Login from './components';
+import Login from './components/Login';
 import { useStateProvider } from './utils/StateProvider';
 import { reducerCases } from './utils/Constants';
+import Spotify from './components/Spotify';
 
 export default function App() {
   const [{token}, dispatch] = useStateProvider();
@@ -11,8 +12,10 @@ export default function App() {
     
     if(hash){
       const token = hash.substring(1).split("&")[0].split("=")[1];
-      dispatch ({action: reducerCases.SET_TOKEN, token});
+      dispatch ({type: reducerCases.SET_TOKEN, token});
     }
-  },[token,displatch])
-  return <div><Login/></div> 
-}
+    },[token,dispatch]);
+    return (<div>
+      {token? <Spotify/> : <Login/>}
+      </div> );
+  }
