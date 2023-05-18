@@ -1,10 +1,16 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import styled from 'styled-components';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import Body from './Body';
 import Footer from './Footer';
+import Playlists from './Playlists';
+import { useStateProvider } from '../utils/StateProvider';
 export default function Spotify() {
+  const [{token},dispatch] = useStateProvider();
+  // useEffect(() => {
+  //   const getUserInfo
+  // },[dispatch,token] )
   return (
     <Container>
         <div className='spotify_body'>
@@ -19,6 +25,7 @@ export default function Spotify() {
         <div className="spotify_footer">
             <Footer />
         </div>
+        <Playlists />
     </Container>
   );
 }

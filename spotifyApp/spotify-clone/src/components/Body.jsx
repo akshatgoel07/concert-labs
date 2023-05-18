@@ -1,7 +1,15 @@
 import React from 'react'
-
+import styled from 'styled-components'
 export default function Body() {
   return (
-    <div>Body</div>
+    <Container>
+      <h1>Receipt</h1>
+      </Container>
   )
 }
+const Container = styled.div`
+h1{
+  
+}
+
+`
