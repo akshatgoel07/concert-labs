@@ -1,6 +1,8 @@
 import React from "react";
 import { useEffect } from "react";
 import NavBar from "../../components/NavBar";
+import BodyComponent from "../../components/BodyComponent";
+import Footer from "../../components/Footer";
 const Home = () => {
   const fetchProfile = async (token) => {
     const url = "https://api.spotify.com/v1/me";
@@ -23,6 +25,7 @@ const Home = () => {
     <>
        <NavBar />
        <BodyComponent />
+       <Footer />
     </>
     );
 };
