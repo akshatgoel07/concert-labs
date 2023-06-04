@@ -1,0 +1,37 @@
+@font-face {
+  font-family: 'Helvetica';
+  src: url('./assets/Helvetica-Font/Helvetica-Bold.ttf');
+}
+
+body {
+  font-family: "Helvetica", Arial, sans-serif; /* Change the font here */
+}
+.navbar * {
+  color: #F8F8FE !important; /* Change the text color here */
+}
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #05060C;
+}
+
+.navbar-left img {
+  height: 30px;
+}
+
+.navbar-middle {
+  flex-grow: 1;
+  text-align: center;
+  font-family: 'Helvetica', Arial, sans-serif;
+}
+
+.navbar-right a {
+  margin-left: 10px;
+}
+.navbar-right a.signup {
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid #fff;
+}
