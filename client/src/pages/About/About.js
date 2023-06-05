@@ -1,5 +1,4 @@
 import React from "react";
-
 const About = () => {
   const handleClick = () => {
     // alert("Button working")
@@ -29,5 +28,4 @@ const About = () => {
     </>
   );
 };
-
 export default About;

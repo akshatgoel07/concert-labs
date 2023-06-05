@@ -1,13 +1,18 @@
 import React from 'react'
-
 export default function NavBar() {
+
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <img src="path_to_your_image" alt="Logo" />
+        <h1>TheWeekday.</h1>
       </div>
       <div className="navbar-middle">
-        <h1>TheWeekday.</h1>
+      <ul className="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/">About</a></li>
+      <li><a href="/">Contact</a></li>
+      <li><a href="/">Privacy Policy</a></li>
+    </ul>
       </div>
       <div className="navbar-right">
         <a href="#">Log in</a>
