@@ -3,7 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import Home from "../pages/Home/Home";
 import About from "../pages/About/About";
-import Select from "../pages/Select";
+import Select from "../pages/Select/Select";
+import Receipt from "../pages/Receipt";
 const routes = [
   {
     path: "/",
@@ -21,7 +22,11 @@ const routes = [
   exact: true,
   element: <Select />,
   private: false,
-
+  },
+  {path: "/Receipt",
+  exact: true,
+  element: <Receipt />,
+  private: false,
   }
 ];
 

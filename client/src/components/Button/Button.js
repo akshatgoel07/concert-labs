@@ -1,9 +1,13 @@
 import React from 'react';
 import './Button.css'; 
-const Button = ({ name }) => {
+const Button = ({ name, destination }) => {
+  function handleGenerateClick() {
+    // Redirect to the "Select" page
+    window.location.href = destination;
+  }
   return (
     <div>
-        <div className="outer-btn">
+        <div className="outer-btn" onClick={handleGenerateClick}>
           <div className="inner-btn">
             {name}
           </div>
@@ -11,5 +15,4 @@ const Button = ({ name }) => {
       </div>
   );
 };
-
 export default Button;

@@ -2,10 +2,6 @@ import React, { useState } from 'react'
 import myImage from '../assets/Images/cards.png'
 import Button from './Button/Button';
 export default function BodyComponent() {
-  function handleGenerateClick() {
-    // Redirect to the "Select" page
-    window.location.href = "/Select";
-  }
   return (
     <div className="body">
       <div className="side-by-side">
@@ -19,7 +15,7 @@ export default function BodyComponent() {
                 Generate
               </div>
             </div> */}
-            <Button name={"Generate"} />
+            <Button name={"Generate"} destination="/Select"/>
           </div>
           
         </div>

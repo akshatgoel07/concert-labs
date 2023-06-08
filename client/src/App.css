@@ -34,10 +34,6 @@ body {
   gap: 5px;
   margin-left: 10px;
 }
-.logo{
- 
-text-fill-color: transparent;
-}
 .body-component {
   display: flex;
   background-color: #181818;
@@ -71,6 +67,7 @@ text-fill-color: transparent;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline;
+  
 }
 .div2 {
   position: absolute;
@@ -109,6 +106,15 @@ color: #A5A5A5;
   line-height: 31px;
   letter-spacing: -0.025em;
   
+  color: #A0A2A4;
+}
+.contentSelect {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 350;
+  font-size: 20.5632px;
+  line-height: 31px;
+  letter-spacing: -0.025em;
   color: #A0A2A4;
 }
 
@@ -161,3 +167,28 @@ border-radius: 25px;
   color: #555;
   text-decoration: underline;
 }
+.containerSelect{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+.center{
+  text-align: center;
+}
+
+.btn-select-page{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  gap: 25px;
+  align-items: center;
+}
+
+.heading{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
