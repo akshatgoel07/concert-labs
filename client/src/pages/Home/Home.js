@@ -25,7 +25,7 @@ const Home = () => {
     <>
        <NavBar />
        <BodyComponent />
-       <Footer />
+       {/* <Footer /> */}
     </>
     );
 };

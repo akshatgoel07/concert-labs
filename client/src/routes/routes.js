@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import Home from "../pages/Home/Home";
 import About from "../pages/About/About";
+import Select from "../pages/Select";
 const routes = [
   {
     path: "/",
@@ -16,7 +17,12 @@ const routes = [
     element: <About />,
     private: false,
   },
-  
+  {path: "/Select",
+  exact: true,
+  element: <Select />,
+  private: false,
+
+  }
 ];
 
 export default function Navigation() {

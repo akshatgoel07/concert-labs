@@ -1,17 +1,18 @@
-@font-face {
-  font-family: 'Helvetica';
-  src: url('./assets/Helvetica-Font/Helvetica-Bold.ttf');
-} 
-*{
+
+* {
   font-family: "Helvetica";
 }
+
 body {
   font-family: "Helvetica";
-  background-color: #181818;
+  background-color: #101112;
 }
+
 .navbar * {
-  color: #F8F8FE !important; /* Change the text color here */
+  color: #F8F8FE !important;
+  /* Change the text color here */
 }
+
 .navbar {
   display: flex;
   width: 80%;
@@ -19,7 +20,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  
+
 }
 
 .navbar-left img {
@@ -28,42 +29,90 @@ body {
   margin-left: 40px;
 }
 
-.navbar-middle {
-  flex-grow: 1;
-  text-align: center;
-  font-family: 'Helvetica', Arial, sans-serif;
-}
 
 .navbar-right a {
+  gap: 5px;
   margin-left: 10px;
 }
-.navbar-right a.signup {
-  display: inline-block;
-  padding: 10px;
-  border: 1px solid #fff;
+.logo{
+ 
+text-fill-color: transparent;
 }
-
-.body-component{
+.body-component {
   display: flex;
   background-color: #181818;
   justify-content: center;
   width: 100%;
 }
 
-.content{
-  font-size: 42px;
-  color: #fff ;
-  position: absolute;
-  text-align: center;
-}
-.content2{
-  color: #fff ;
-  position: absolute;
-  text-align: center;
-  margin-top: 120px;
+.body {
+  /* Optional: To center the content horizontally */
 }
 
-.custom-button {
+.side-by-side {
+  display: flex;
+}
+
+.div1 {
+  position: absolute;
+  width: 50%;
+  height: 728px;
+  left: 0px;
+  top: 104px;
+}
+.wrapped{
+  background-image: linear-gradient(to right, #3FB9FE, #09FF35);
+  -webkit-background-clip: text; 
+  color: transparent;
+  display: inline;
+}
+.logo{
+  background: linear-gradient(to right,#3FB9FE, #09FF35);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
+}
+.div2 {
+  position: absolute;
+  width: 50%;
+  height: 728px;
+  left: 740px;
+  top: 104px;
+}
+
+.content {
+position: absolute;
+width: 80%;
+left: calc(50% - 556px/2 + 45px);
+top: 27px;
+
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 700;
+font-size: 57.5172px;
+line-height: 69px;
+letter-spacing: -0.01em;
+
+color: #A5A5A5;
+}
+
+.content2 {
+  position: absolute;
+  width: 65%;
+  left: calc(50% - 556px/2 + 45px);
+  top: 221.92px;
+  
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 350;
+  font-size: 20.5632px;
+  line-height: 31px;
+  letter-spacing: -0.025em;
+  
+  color: #A0A2A4;
+}
+
+/* .custom-button {
 
   position: absolute;
   text-align: center;
@@ -73,38 +122,31 @@ body {
   background-color: #fff;
   color: white;
   background: linear-gradient(94.52deg, #2C9BCA 9.79%, #0CF93E 90.41%), linear-gradient(94.52deg, #2C9BCA 9.79%, #0CF93E 90.41%);
+} */
+.btn-pos{
+box-sizing: border-box;
+margin-top: 200px;
+position: absolute;
+width: 221px;
+height: 61px;
+left: calc(50% - 556px/2 + 45px);
+top: 190px;
+
+border-radius: 25px;
 }
-.outer-btn{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin-top: 200px;
-  width: 200px;
-  height: 50px;
-  border-radius: 30px;
-  color: white;
-  background: linear-gradient(94.52deg, #2C9BCA 9.79%, #0CF93E 90.41%), linear-gradient(94.52deg, #2C9BCA 9.79%, #0CF93E 90.41%);
-}
-.inner-btn{
-  width: 97%;
-  height: 92%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* padding: 13px 28px; */
-  border-radius: 30px;
-  background-color: #181818;
+
+
+.footer {
   text-align: center;
 }
-.footer{
-  text-align: center;
-}
+
 .footer-links {
+  
   list-style: none;
   padding: 0;
   margin: 0;
 }
+
 .footer-links li {
   display: inline-block;
   margin: 0 10px;
