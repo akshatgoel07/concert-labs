@@ -3,7 +3,7 @@ const About = () => {
   const handleClick = () => {
     // alert("Button working")
     const clientId = "1620b101ae454685837ad774b688cb24";
-    const redirectUrl = "http://localhost:3000/";
+    const redirectUrl = "http://localhost:3000/Select";
     const apiUrl = "https://accounts.spotify.com/authorize";
     const scope = [
       "user-read-private",
@@ -20,10 +20,6 @@ const About = () => {
   };
   return (
     <>
-      <img
-        src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Black.png"
-        alt="spotify"
-      />
       <button onClick={handleClick}>Connect Spotify</button>
     </>
   );

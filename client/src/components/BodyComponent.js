@@ -15,7 +15,7 @@ export default function BodyComponent() {
                 Generate
               </div>
             </div> */}
-            <Button name={"Generate"} destination="/Select"/>
+            <Button name={"Generate"} destination= {"/Select"}/>
           </div>
           
         </div>

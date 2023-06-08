@@ -27,7 +27,7 @@ const routes = [
   exact: true,
   element: <Receipt />,
   private: false,
-  }
+  },
 ];
 
 export default function Navigation() {
