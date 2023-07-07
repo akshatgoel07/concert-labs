@@ -31,6 +31,20 @@ export default function Navigation() {
     const location = useLocation();
     const navigate = useNavigate();
 
+    console.log("Location:", location, window.location);
+    useEffect(() => {
+        console.log("Location:", location);
+        var token = localStorage.getItem("spotifyToken");
+        if (!token) {
+            const urlParams = new URLSearchParams(
+                window.location.hash.substring(1)
+            );
+            token = urlParams.get("access_token");
+            console.log("Access Token:", token);
+            localStorage.setItem("spotifyToken", token);
+        }
+    }, [window.location]);
+
     return (
         <Routes>
             {routes.map((route, index) => (
