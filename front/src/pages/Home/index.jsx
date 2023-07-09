@@ -10,7 +10,7 @@ const Home = () => {
     const handleClick = () => {
         // alert("Button working")
         const clientId = "1620b101ae454685837ad774b688cb24";
-        const redirectUrl = `${window.location.href}Receipt`;
+        const redirectUrl = "https://concert-labs.vercel.app/Receipt";
         const apiUrl = "https://accounts.spotify.com/authorize";
         const scope = [
             "user-read-private",
