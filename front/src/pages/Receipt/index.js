@@ -7,11 +7,35 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const TopArt = () => {
-    var name = localStorage.getItem("username");
+    var name = localStorage.getItem("concertLabsUsername");
     const navigate = useNavigate();
     const [artists, setArtists] = useState([]);
     console.log(accessToken);
     var accessToken = localStorage.getItem("spotifyToken");
+    useEffect(() => {
+        const fetchProfile = async (token) => {
+            const url = "https://api.spotify.com/v1/me";
+            const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+            });
+            const data = await response.json();
+            if (response.status === 401) {
+                localStorage.removeItem("spotifyToken");
+                navigate("/");
+                return;
+            }
+            // console.log(response);
+            // console.log("Profile Data:", data);
+            const userName = data.display_name;
+            // console.log("User Name:", userName);
+            localStorage.setItem("concertLabsUsername", userName);
+        };
+        var token = localStorage.getItem("spotifyToken");
+        fetchProfile(token);
+    }, []);
     useEffect(() => {
         fetch("https://api.spotify.com/v1/me/top/artists", {
             headers: {
@@ -62,12 +86,15 @@ const TopArt = () => {
     }
     const today = new Date();
     const formatDate = (date) => {
-        const day = date.getDate().toString().padStart(2, '0');
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, "0");
+        const month = (date.getMonth() + 1).toString().padStart(2, "0");
         const year = date.getFullYear().toString();
         return `${day}-${month}-${year}`;
-      };
-      const formattedDate = formatDate(today);
+    };
+    const formattedDate = formatDate(today);
+    if (!name) {
+        // window.location.reload();
+    }
     return (
         <div className="receipt">
             <Navbar />

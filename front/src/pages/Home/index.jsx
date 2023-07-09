@@ -6,35 +6,11 @@ import Tickets from "../../assets/ticket.svg";
 
 const Home = () => {
     const navigate = useNavigate();
-    useEffect(() => {
-        const fetchProfile = async (token) => {
-            const url = "https://api.spotify.com/v1/me";
-            const response = await fetch(url, {
-                method: "GET",
-                headers: {
-                    Authorization: "Bearer " + token,
-                },
-            });
-            const data = await response.json();
-            if (response.status === 401) {
-                localStorage.removeItem("spotifyToken");
-                navigate("/");
-                return;
-            }
-            console.log(response);
-            console.log("Profile Data:", data);
-            const userName = data.display_name;
-            console.log("User Name:", userName);
-            localStorage.setItem('username', userName);
-        };
-        var token = localStorage.getItem("spotifyToken");
-        fetchProfile(token);
-        
-    }, []);
+    
     const handleClick = () => {
         // alert("Button working")
         const clientId = "1620b101ae454685837ad774b688cb24";
-        const redirectUrl = "https://concert-labs.vercel.app/Receipt";
+        const redirectUrl = `${window.location.href}Receipt`;
         const apiUrl = "https://accounts.spotify.com/authorize";
         const scope = [
             "user-read-private",
