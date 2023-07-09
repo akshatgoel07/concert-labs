@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Arrow from "../../assets/arrow.svg";
 import Tickets from "../../assets/ticket.svg";
@@ -10,7 +10,8 @@ const Home = () => {
     const handleClick = () => {
         // alert("Button working")
         const clientId = "1620b101ae454685837ad774b688cb24";
-        const redirectUrl = "https://concert-labs.vercel.app/Receipt";
+        // const redirectUrl = "https://concert-labs.vercel.app/Receipt";
+        const redirectUrl = "http://localhost:3000/Receipt";
         const apiUrl = "https://accounts.spotify.com/authorize";
         const scope = [
             "user-read-private",

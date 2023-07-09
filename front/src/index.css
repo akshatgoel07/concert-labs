@@ -230,31 +230,25 @@ line-height: normal;
     width: 100%;
     margin-top: 0px;
   }
-
   .rText {
     margin-top: 30px;
   }
-
   .display p {
     display: none;
   }
-
   .display {
     justify-content: center;
   }
-
   .lText p {
     font-size: 30px;
     font-weight: 600;
     line-height: 40px;
   }
-
   .rText {
     font-size: 18px;
     opacity: 0.75;
     font-weight: 300;
   }
-
   .menuBar {
   position: relative;
   padding: 2rem;
@@ -265,7 +259,6 @@ line-height: normal;
   display: flex;
   flex-direction: column;
   } 
-
   .menuBar .links {
     display: flex;
     flex-direction: column;

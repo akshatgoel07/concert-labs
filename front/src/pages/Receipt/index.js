@@ -3,14 +3,28 @@ import Navbar from "../../components/Navbar";
 import Sphere from "../../assets/sphere.svg";
 import Arrow from "../../assets/arrow.svg";
 import html2canvas from "html2canvas";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
+
 const TopArt = () => {
+    const location = useLocation();
+    useEffect(() => {
+        // console.log("Location:", location);
+        // var token = localStorage.getItem("spotifyToken");
+        // if (token) {
+            const urlParams = new URLSearchParams(
+                window.location.hash.substring(1)
+            );
+            var token = urlParams.get("access_token");
+            // console.log("Access Token:", token);
+            localStorage.setItem("spotifyToken", token);
+        // }
+    }, [window.location]);
     var name = localStorage.getItem("concertLabsUsername");
     const navigate = useNavigate();
     const [artists, setArtists] = useState([]);
-    console.log(accessToken);
+    // console.log(accessToken);
     var accessToken = localStorage.getItem("spotifyToken");
     useEffect(() => {
         const fetchProfile = async (token) => {
@@ -24,7 +38,8 @@ const TopArt = () => {
             const data = await response.json();
             if (response.status === 401) {
                 localStorage.removeItem("spotifyToken");
-                navigate("/");
+                // navigate("/");
+                // window.location.reload();
                 return;
             }
             // console.log(response);
@@ -50,7 +65,7 @@ const TopArt = () => {
                 }
                 console.log(data.items);
                 // Process the response data containing the user's most played artists
-                const artistNames = data.items.map((artist) => artist.name);
+                const artistNames = data?.items?.map((artist) => artist.name);
                 setArtists(artistNames);
                 console.log(artistNames);
             })
