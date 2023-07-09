@@ -1,44 +1,40 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Arrow from "../../assets/arrow.svg";
 import Tickets from "../../assets/ticket.svg";
-import { useNavigate } from "react-router-dom";
+
 const Home = () => {
     const navigate = useNavigate();
-    const fetchProfile = async (token) => {
-        const url = "https://api.spotify.com/v1/me";
-        const response = await fetch(url, {
-            method: "GET",
-            headers: {
-                Authorization: "Bearer " + token,
-            },
-        });
-        const data = await response.json();
-        if (response.status === 401) {
-            localStorage.removeItem("spotifyToken");
-            navigate("about");
-            return;
-        }
-        console.log(response);
-        console.log("Profile Data:", data);
-    };
-    // useEffect(() => {
-    //     var token = localStorage.getItem("spotifyToken");
-    //     if (!token) {
-    //         const urlParams = new URLSearchParams(
-    //             window.location.hash.substring(1)
-    //         );
-    //         token = urlParams.get("access_token");
-    //         console.log("Access Token:", token);
-    //         localStorage.setItem("spotifyToken", token);
-    //     }
-    //     fetchProfile(token);
-    // }, []);
-
+    useEffect(() => {
+        const fetchProfile = async (token) => {
+            const url = "https://api.spotify.com/v1/me";
+            const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+            });
+            const data = await response.json();
+            if (response.status === 401) {
+                localStorage.removeItem("spotifyToken");
+                navigate("/");
+                return;
+            }
+            console.log(response);
+            console.log("Profile Data:", data);
+            const userName = data.display_name;
+            console.log("User Name:", userName);
+            localStorage.setItem('username', userName);
+        };
+        var token = localStorage.getItem("spotifyToken");
+        fetchProfile(token);
+        
+    }, []);
     const handleClick = () => {
         // alert("Button working")
         const clientId = "1620b101ae454685837ad774b688cb24";
-        const redirectUrl = "http://localhost:3000/Receipt";
+        const redirectUrl = "https://concert-labs.vercel.app/Receipt";
         const apiUrl = "https://accounts.spotify.com/authorize";
         const scope = [
             "user-read-private",
@@ -67,6 +63,7 @@ const Home = () => {
                 </div>
                 <button
                     type="button"
+                    className="generate-btn"
                     onClick={() => {
                         handleClick();
                     }}
@@ -82,5 +79,4 @@ const Home = () => {
         </div>
     );
 };
-
 export default Home;
