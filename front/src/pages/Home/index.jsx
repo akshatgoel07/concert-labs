@@ -3,7 +3,7 @@ import { useNavigate} from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Arrow from "../../assets/arrow.svg";
 import Tickets from "../../assets/ticket.svg";
-
+import Footer from "../../components/Footer";
 const Home = () => {
     const navigate = useNavigate();
     
@@ -34,7 +34,7 @@ const Home = () => {
                         <p>Create your concert line up with your fav artist</p>
                     </div>
                     <div className="rText">
-                        <p>This will be a demo subtitle for the header</p>
+                        <p>The All green offsprings, guns and the melody</p>
                     </div>
                 </div>
                 <button
@@ -52,7 +52,9 @@ const Home = () => {
                     <img src={Tickets} alt="" />
                 </div>
             </div>
+            <Footer />
         </div>
+        
     );
 };
 export default Home;

@@ -61,7 +61,7 @@ const TopArt = () => {
             .then((data) => {
                 if (data.status === 401) {
                     localStorage.removeItem("spotifyToken");
-                    navigate("about");
+                    // navigate("about");
                 }
                 console.log(data.items);
                 // Process the response data containing the user's most played artists
