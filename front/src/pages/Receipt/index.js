@@ -5,14 +5,13 @@ import Arrow from "../../assets/arrow.svg";
 import html2canvas from "html2canvas";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import Footer from "../../components/Footer";
-
+import Footer from "../../components/Footer/Footer"
+import BackGroundImg from "../../assets/wrinkled-bg.png"
+import CurrentDate from "../../components/Date/CurrentDate";
+import "./receipt.css";
 const TopArt = () => {
     const location = useLocation();
     useEffect(() => {
-        // console.log("Location:", location);
-        // var token = localStorage.getItem("spotifyToken");
-        // if (token) {
             const urlParams = new URLSearchParams(
                 window.location.hash.substring(1)
             );
@@ -99,42 +98,32 @@ const TopArt = () => {
             link.click();
         });
     }
-    const today = new Date();
-    const formatDate = (date) => {
-        const day = date.getDate().toString().padStart(2, "0");
-        const month = (date.getMonth() + 1).toString().padStart(2, "0");
-        const year = date.getFullYear().toString();
-        return `${day}-${month}-${year}`;
-    };
-    const formattedDate = formatDate(today);
-    if (!name) {
-        // window.location.reload();
-    }
     return (
         <div className="receipt">
             <Navbar />
-            <div className="outer">
-                <div className="ticket">
-                    <div className="circle">
-                        <img src={Sphere} alt="" />
+            <div className="receipt__outer">
+                <div className="ticket" 
+                style={{backgroundImage: `url(${BackGroundImg})`}}
+                >
+                    <div className="ticket__top-heading">
+                       Concert Pass
                     </div>
-                    <div className="name">
-                        {name}
-                        <div className="category">{randomCategory}</div>
+                    <div className="sub-heading">
+                        <div className="ticket__date"><CurrentDate /></div>
                     </div>
-                    <div className="topArtists">
-                        <h1 className="artist-heading">Concert LineUp</h1>
-                        <div className="artists">
-                            {artists.slice(0, 6).map((it, index) => (
-                                <div key={it} className="artist-item">
+                    <div className="ticket__username">
+                        Pass for {name}
+                        <div className="ticket__category">{randomCategory}</div>
+                    </div>
+                    <div className="ticket__top-artists">
+                        <h1 className="ticket__artist-heading">Concert LineUp</h1>
+                        <div className="ticket__artists">
+                            {artists.slice(0, 10).map((it, index) => (
+                                <div key={it} className="ticket__artist-item">
                                     {index + 1}. {it}
                                 </div>
                             ))}
                         </div>
-                    </div>
-                    <div className="ticket-footer">
-                        <div className="dateD">{formattedDate}</div>
-                        <p>Concert Pass</p>
                     </div>
                 </div>
             </div>
@@ -151,9 +140,9 @@ const TopArt = () => {
                 <button type="button" onClick={() => {}}>
                     <img src={Arrow} alt="" />
                     <p>Share</p>
-                </button>
-            <Footer />
+                </button> 
             </div>
+            <Footer />
         </div>
     );
 };

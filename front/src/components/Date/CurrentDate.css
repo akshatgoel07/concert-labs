@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "receipt";
+    src: url(../../Fonts/Merchant_Copy.ttf) format("truetype");
+  }
+
+  .date_format{
+    color: '#333333';
+    font-family: "receipt";
+  }

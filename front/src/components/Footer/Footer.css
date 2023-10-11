@@ -1,0 +1,26 @@
+.footer {
+    padding: 80px 0 40px 0;
+    text-align: center;
+  }
+  
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+  }
+  
+  .footer-icon {
+    font-size: 18px;
+    color: #000
+  }
+  
+  .footer-icon:hover {
+    /* color: #fff; */
+  }
+  
