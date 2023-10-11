@@ -1,8 +1,8 @@
 # Concert Labs
 
-Link to application - concert-labs.vercel.app/
+Link to application - concert-labs.vercel.app
 
-NOTE: This code is admittedly not super clean as I was in quite a time crunch when I originally wrote it and never got the chance to really go back and fix everything, so sorry in advance! Despite this, I am making it public as a few people have asked me about it :) When I have time, I hope to refactor & clean this up though!
+NOTE: Code is very obscure, working on improving it
 
 ## Running the App Locally
 
@@ -24,6 +24,6 @@ Then, open `http://localhost:3000` in a browser.
 
 Refactoring the code
 
-Removing reload bug on generate page
+Removing the reload bug on the generate page
 
 Fixing the issue with redundant Node modules
