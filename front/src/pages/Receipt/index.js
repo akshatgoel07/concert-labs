@@ -5,7 +5,7 @@ import Arrow from "../../assets/arrow.svg";
 import html2canvas from "html2canvas";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-
+import Footer from "../../components/Footer";
 
 const TopArt = () => {
     const location = useLocation();
@@ -152,6 +152,7 @@ const TopArt = () => {
                     <img src={Arrow} alt="" />
                     <p>Share</p>
                 </button>
+            <Footer />
             </div>
         </div>
     );
