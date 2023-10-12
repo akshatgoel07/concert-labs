@@ -20,6 +20,7 @@ const Footer = () => {
             <FaPhone className="footer-icon" />
           </a>
         </div>
+        {/* <p>&copy; 2023 Akshat Goel</p> */}
       </div>
     </footer>
   );

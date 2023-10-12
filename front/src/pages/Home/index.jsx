@@ -1,61 +1,61 @@
-import React, { useEffect } from "react";
-import { useNavigate} from "react-router-dom";
-import Navbar from "../../components/Navbar";
-import Arrow from "../../assets/arrow.svg";
-import Tickets from "../../assets/ticket.svg";
-import Footer from "../../components/Footer/Footer";
+import React,{useState, useEffect} from 'react';
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+import Navbar from '../../components/Navbar';
+import Tickets from '../../assets/ticket.svg';
+import Footer from '../../components/Footer/Footer';
+import { fetchSpotifyAuthorizationUrl } from './api';
+import { createButton } from './buttonFactory';
+axios.defaults.baseURL = 'http://localhost:3001';
 const Home = () => {
-    const navigate = useNavigate();
-    
-    const handleClick = () => {
-        // alert("Button working")
-        const clientId = "1620b101ae454685837ad774b688cb24";
-        // const redirectUrl = "https://concert-labs.vercel.app/Receipt";
-        const redirectUrl = "http://localhost:3000/Receipt";
-        const apiUrl = "https://accounts.spotify.com/authorize";
-        const scope = [
-            "user-read-private",
-            "user-read-email",
-            "user-modify-playback-state",
-            "user-read-playback-state",
-            "user-read-currently-playing",
-            "user-read-recently-played",
-            "user-top-read",
-        ];
-        window.location.href = `${apiUrl}?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=${scope.join(
-            " "
-        )}&response_type=token&show_dialog=true`;
-    };
-    return (
-        <div>
-            <Navbar />
-            <div className="container">
-                <div className="content">
-                    <div className="lText">
-                        <p>Create your concert line up with your fav artist</p>
-                    </div>
-                    <div className="rText">
-                        <p>The All green offsprings, guns and the melody</p>
-                    </div>
-                </div>
-                <button
-                    type="button"
-                    className="generate-btn"
-                    onClick={() => {
-                        handleClick();
-                    }}
-                >
-                    <img src={Arrow} alt="" />
-                    <p>Generate</p>
-                </button>
-                <div className="cb">
-                    <p>Top Track Generator</p>
-                    <img className="phone-image" src={Tickets} alt="" />
-                </div>
-            </div>
-            <Footer />
+    axios.defaults.baseURL = 'http://localhost:3001'; 
+  const navigate = useNavigate();
+
+  const handleGenerateClick = () => {
+    const authorizationUrl = fetchSpotifyAuthorizationUrl();
+    window.location.href = authorizationUrl;
+  };
+// const [authUrl, setAuthUrl] = useState('');
+
+//   useEffect(() => {
+//     axios.get('generateSpotifyAuthUrl')
+//       .then((response) => {
+//         setAuthUrl(response.data);
+//       })
+//       .catch((error) => {
+//         console.error(error);
+//       });
+//   }, []);
+
+//   const handleGenerateClick = () => {
+//     if (authUrl) {
+//         window.location.href = authUrl;
+//       }
+//   };
+
+// To- do : Fix issue, problem with endpoints, server.js not working
+
+  return (
+    <div>
+      <Navbar />
+      <div className="container">
+        <div className="content">
+          <div className="lText">
+            <p>Create your concert line up with your fav artist</p>
+          </div>
+          <div className="rText">
+            <p>The All green offsprings, guns and the melody</p>
+          </div>
         </div>
-        
-    );
+        {createButton('generate', handleGenerateClick)}
+        <div className="cb">
+          <p>Top Track Generator</p>
+          <img className="phone-image" src={Tickets} alt="" />
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
 };
+
 export default Home;

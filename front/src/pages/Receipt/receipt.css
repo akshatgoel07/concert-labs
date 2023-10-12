@@ -1,73 +1,65 @@
 @font-face {
     font-family: "receipt";
     src: url(../../Fonts//Merchant_Copy.ttf) format("truetype");
-  }
-  *{
+}
+
+/* *{
     color: #333333;
     font-family: 'receipt';
-  }
+  } */
+.receipt__outer {
 
-  .receipt__outer {
     margin-top: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-  
-  .ticket {
+}
+
+.ticket {
     width: 239px;
     height: 545px;
     padding: 11px 26px;
-  
-  }
-  
-  .circle {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .ticket__top-heading{
+
+}
+
+.ticket__top-heading {
     color: #333333;
     font-family: "Helvetica Neue", Helvetica, sans-serif;
     font-weight: 600;
     font-size: 3.3rem;
     text-align: center;
-  font-size: 20px;
-  }
-  .ticket__username {
+    font-size: 20px;
+}
+
+.ticket__username {
+    text-transform: uppercase;
+    font-family: 'receipt';
     color: #000;
     font-size: 18px;
+}
+
+.ticket__category {
     font-family: 'receipt';
-  }
-  
-  .ticket__category {
-    color: #D34DBC;
-  }
-  
-  .ticket__artist-heading{
+    text-transform: uppercase;
+    color: #333333;
+}
+
+.ticket__artist-heading {
+    color: #000;
+    font-family: 'receipt';
     font-size: 20px;
     margin-top: 20px;
-  }
-  
-  .ticket__artist-item{
+}
+
+.ticket__artist-item {
     font-family: "receipt";
     color: #333333;
     margin-top: 5px;
-    /* column-gap: 10px; */
-  }
-  .ticket__date{
+}
+
+.ticket__date {
     color: #333333;
     font-family: "receipt";
     font-size: 10px;
-    }
-    
-    .ticket-footer p{
-        font-family: poppins;
-      color: #C0009F;
-      font-family: "receipt";
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    }
+}
