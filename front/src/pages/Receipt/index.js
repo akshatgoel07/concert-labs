@@ -13,17 +13,20 @@ import './receipt.css';
 
 const TopArt = () => {
     const [artists, setArtists] = useState([]);
-    // const location = useLocation();
-    // const navigate = useNavigate();
     const accessToken = localStorage.getItem('spotifyToken');
     const name = localStorage.getItem('concertLabsUsername');
-
+    useEffect(() => {
+            const urlParams = new URLSearchParams(
+                window.location.hash.substring(1)
+            );
+            var token = urlParams.get("access_token");
+            localStorage.setItem("spotifyToken", token);
+    }, [window.location]);
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const profileData = await fetchProfile(accessToken);
                 const artistNames = await fetchTopArtists(accessToken);
-
                 setArtists(artistNames);
 
                 const userName = profileData.display_name;
@@ -32,7 +35,6 @@ const TopArt = () => {
                 console.error(error);
             }
         };
-
         fetchData();
     }, [accessToken]);
 
@@ -82,7 +84,7 @@ const TopArt = () => {
                                         {index + 1}. {artistName}
                                     </div>
                                 ))
-                            ) : (
+                            ):(
                                 <div className="no-artists-message">Token Expired</div>
                             )}
                         </div>

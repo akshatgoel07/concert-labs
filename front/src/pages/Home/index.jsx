@@ -6,15 +6,15 @@ import Tickets from '../../assets/ticket.svg';
 import Footer from '../../components/Footer/Footer';
 import { fetchSpotifyAuthorizationUrl } from './api';
 import { createButton } from './buttonFactory';
-axios.defaults.baseURL = 'http://localhost:3001';
+// axios.defaults.baseURL = 'http://localhost:3001';
 const Home = () => {
-    axios.defaults.baseURL = 'http://localhost:3001'; 
   const navigate = useNavigate();
 
   const handleGenerateClick = () => {
     const authorizationUrl = fetchSpotifyAuthorizationUrl();
     window.location.href = authorizationUrl;
   };
+
 // const [authUrl, setAuthUrl] = useState('');
 
 //   useEffect(() => {

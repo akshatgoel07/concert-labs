@@ -1,5 +1,5 @@
 export const fetchSpotifyAuthorizationUrl = () => {
-    const clientId = "1620b101ae454685837ad774b688cb24";
+    const clientId = "7ff44a757bbe4965a0884d86fb046bab";
     const redirectUrl = "http://localhost:3000/Receipt";
     const apiUrl = "https://accounts.spotify.com/authorize";
     const scope = [
