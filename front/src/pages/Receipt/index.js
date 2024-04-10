@@ -15,6 +15,14 @@ const TopArt = () => {
     const [artists, setArtists] = useState([]);
     const accessToken = localStorage.getItem('spotifyToken');
     const name = localStorage.getItem('concertLabsUsername');
+
+    useEffect(() => {
+            const urlParams = new URLSearchParams(
+                window.location.hash.substring(1)
+            );
+            var token = urlParams.get("access_token");
+            localStorage.setItem("spotifyToken", token);
+    }, [window.location]);
     useEffect(() => {
             const urlParams = new URLSearchParams(
                 window.location.hash.substring(1)
