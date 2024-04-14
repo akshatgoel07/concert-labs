@@ -1,100 +1,175 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import html2canvas from 'html2canvas';
+import React, { useState, useEffect } from "react";
+import html2canvas from "html2canvas";
 
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer/Footer';
-import CurrentDate from '../../components/Date/CurrentDate';
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer/Footer";
 
-import BackGroundImg from '../../assets/wrinkled-bg.png';
-import Arrow from '../../assets/arrow.svg';
+import BackGroundImg from "../../assets/receipt-bg.jpg";
+import Arrow from "../../assets/arrow.svg";
+import DottedLine from "../../assets/dottedLine.svg";
+import music from "../../assets/music.svg";
+import Barcode from "../../assets/barcode.svg";
 
-import './receipt.css';
+import "./receipt.css";
 
 const TopArt = () => {
-    const [artists, setArtists] = useState([]);
-    const accessToken = localStorage.getItem('spotifyToken');
-    const name = localStorage.getItem('concertLabsUsername');
+    const date = new Date();
 
-    useEffect(() => {
-            const urlParams = new URLSearchParams(
-                window.location.hash.substring(1)
-            );
-            var token = urlParams.get("access_token");
-            localStorage.setItem("spotifyToken", token);
-    }, [window.location]);
-    useEffect(() => {
-            const urlParams = new URLSearchParams(
-                window.location.hash.substring(1)
-            );
-            var token = urlParams.get("access_token");
-            localStorage.setItem("spotifyToken", token);
-    }, [window.location]);
+    const [artists, setArtists] = useState([]);
+    const [token, setToken] = useState(null);
+    const [userName, setUserName] = useState("Mysterious?");
+    const name = localStorage.getItem("concertLabsUsername");
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const profileData = await fetchProfile(accessToken);
-                const artistNames = await fetchTopArtists(accessToken);
+                const profileData = await fetchProfile(token);
+                const artistNames = await fetchTopArtists(token);
                 setArtists(artistNames);
-
-                const userName = profileData.display_name;
-                localStorage.setItem('concertLabsUsername', userName);
+                setUserName(profileData.display_name);
             } catch (error) {
                 console.error(error);
             }
         };
-        fetchData();
-    }, [accessToken]);
-
-    const categories = [
-        'Curious',
-        'Avid Listener',
-        'Elite Taste',
-        'Rare Taste',
-        'Expressive',
-        'Tune Architect',
-        'Melancholic',
-    ];
-
-    const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+        const getToken = () => {
+            if (!token) {
+                var urlParams = new URLSearchParams(
+                    window.location.hash.substring(1)
+                );
+                setToken(urlParams.get("access_token"));
+                console.log(token);
+            }
+            console.log(token);
+        };
+        getToken();
+        if (token) {
+            fetchData();
+        }
+    }, [token]);
 
     const downloadReceipt = () => {
-        const receipt = document.querySelector('.ticket');
+        const receipt = document.querySelector(".ticket");
 
         html2canvas(receipt).then((canvas) => {
-            const image = canvas.toDataURL('image/png');
-            const link = document.createElement('a');
+            const image = canvas.toDataURL("image/png");
+            const link = document.createElement("a");
             link.href = image;
-            link.download = 'receipt.png';
+            link.download = "receipt.png";
             link.click();
         });
     };
+    async function fetchProfile(token) {
+        const response = await fetch("https://api.spotify.com/v1/me", {
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + token,
+            },
+        });
+        if (response.status === 401) {
+            localStorage.removeItem("spotifyToken");
+            throw new Error("Failed to fetch profile");
+        }
+        return response.json();
+    }
+
+    async function fetchTopArtists(token) {
+        const response = await fetch(
+            "https://api.spotify.com/v1/me/top/artists",
+            {
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+                token,
+            }
+        );
+        if (response.status === 401) {
+            localStorage.removeItem("spotifyToken");
+            throw new Error("Failed to fetch top artists");
+        }
+        const data = await response.json();
+        return data?.items?.map((artist) => artist.name) || [];
+    }
 
     return (
         <div className="receipt">
             <Navbar />
             <div className="receipt__outer">
-                <div className="ticket" style={{ backgroundImage: `url(${BackGroundImg})` }}>
-                    <div className="ticket__top-heading">
-                        CONCERT PASS
-                        <div className="ticket__category">{randomCategory}</div>
+                <div
+                    className="ticket"
+                    style={{ backgroundImage: `url(${BackGroundImg})` }}
+                >
+                    <div className="ticket__top-heading">CONCERT PASS</div>
+                    <div className="dotted_data">
+                        <div className="date_data">
+                            <div className="date_data-img"></div>
+                            <img src={DottedLine} alt="a dotted line" />
+                            Date:&nbsp; {date.toDateString()}
+                        </div>
+                        <p className="time_data">
+                            Time:&nbsp; {date.toLocaleTimeString()}
+                        </p>
+                        <img src={DottedLine} alt="a dotted line" />
                     </div>
-                    <div className="sub-heading">
-                        {/* <div className="ticket__date"><CurrentDate /></div> */}
-                    </div>
-                    <div className="ticket__username">PASS FOR {name}</div>
+
                     <div className="ticket__top-artists">
-                        <h1 className="ticket__artist-heading">Concert LineUp</h1>
-                        <div className="ticket__artists">
+                        <div className="items">
+                            <p>QTY</p>
+                            <p>ITEM</p>
+                            <p></p>
+                        </div>
+                        <div className="ticket__artists-grid">
                             {artists.length > 0 ? (
-                                artists.slice(0, 10).map((artistName, index) => (
-                                    <div key={artistName} className="ticket__artist-item">
-                                        {index + 1}. {artistName}
-                                    </div>
-                                ))
-                            ):(
-                                <div className="no-artists-message">Token Expired</div>
+                                artists
+                                    .slice(0, 10)
+                                    .map((artistName, index) => (
+                                        <div
+                                            key={artistName}
+                                            className="ticket__artist-item"
+                                        >
+                                            <div className="ticket__artist-rank">
+                                                {index + 1}
+                                            </div>{" "}
+                                            <div className="ticket__artist-name">
+                                                {artistName}
+                                            </div>{" "}
+                                        </div>
+                                    ))
+                            ) : (
+                                <div className="no-artists-message">
+                                    Let me cook up some artists for you!
+                                </div>
                             )}
+                        </div>
+                    </div>
+                    <img src={DottedLine} alt="a dotted line" />
+                    <div className="bottom_details">
+                        <div className="item-count">
+                            <p>ITEM COUNT:</p>
+                            <p>10</p>
+                        </div>
+                        <div className="total">
+                            <p>TOTAL:</p>
+                            <p>34:50</p>
+                        </div>
+                    </div>
+
+                    <img src={DottedLine} alt="a dotted line" />
+                    <div className="bottom">
+                        <div className="cardHolder">
+                            <img src={music} alt="" />
+                            <p>Card Holder: </p>
+                            <p>{userName}</p>
+                        </div>
+                        <div className="barcode">
+                            <img src={Barcode} alt="" />
+                        </div>
+                        <div className="link">
+                            <a
+                                href=" https://concert-labs.vercel.app/"
+                                target="_blank"
+                            >
+                                <p>https://concert-labs.vercel.app/ </p>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -104,7 +179,7 @@ const TopArt = () => {
                     <img src={Arrow} alt="" />
                     <p>Download</p>
                 </button>
-                <button type="button" onClick={() => { /* Handle Share */ }}>
+                <button type="button" onClick={() => {}}>
                     <img src={Arrow} alt="" />
                     <p>Share</p>
                 </button>
@@ -113,33 +188,5 @@ const TopArt = () => {
         </div>
     );
 };
-
-async function fetchProfile(accessToken) {
-    const response = await fetch('https://api.spotify.com/v1/me', {
-        method: 'GET',
-        headers: {
-            Authorization: 'Bearer ' + accessToken,
-        },
-    });
-    if (response.status === 401) {
-        localStorage.removeItem('spotifyToken');
-        throw new Error('Failed to fetch profile');
-    }
-    return response.json();
-}
-
-async function fetchTopArtists(accessToken) {
-    const response = await fetch('https://api.spotify.com/v1/me/top/artists', {
-        headers: {
-            Authorization: 'Bearer ' + accessToken,
-        },
-    });
-    if (response.status === 401) {
-        localStorage.removeItem('spotifyToken');
-        throw new Error('Failed to fetch top artists');
-    }
-    const data = await response.json();
-    return data?.items?.map((artist) => artist.name) || [];
-}
 
 export default TopArt;

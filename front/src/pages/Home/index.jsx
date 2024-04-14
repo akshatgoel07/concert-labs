@@ -1,39 +1,14 @@
-import React,{useState, useEffect} from 'react';
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import Tickets from '../../assets/ticket.svg';
 import Footer from '../../components/Footer/Footer';
 import { fetchSpotifyAuthorizationUrl } from './api';
 import { createButton } from './buttonFactory';
-// axios.defaults.baseURL = 'http://localhost:3001';
 const Home = () => {
-  const navigate = useNavigate();
 
   const handleGenerateClick = () => {
     const authorizationUrl = fetchSpotifyAuthorizationUrl();
     window.location.href = authorizationUrl;
   };
-
-// const [authUrl, setAuthUrl] = useState('');
-
-//   useEffect(() => {
-//     axios.get('generateSpotifyAuthUrl')
-//       .then((response) => {
-//         setAuthUrl(response.data);
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   }, []);
-
-//   const handleGenerateClick = () => {
-//     if (authUrl) {
-//         window.location.href = authUrl;
-//       }
-//   };
-
-// To- do : Fix issue, problem with endpoints, server.js not working
 
   return (
     <div>

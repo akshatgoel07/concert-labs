@@ -8,8 +8,8 @@ function App() {
     <BrowserRouter>
      <Helmet>
                 <meta charSet="utf-8" />
-                <title>Concert Labs </title>
-                <link rel="canonical" href="http://mysite.com/example" />
+                <title>Concert Labs</title>
+                <link rel="canonical" href="https://concert-labs.vercel.app/" />
                 <meta name="description" content="Concert Labs" />
             </Helmet>
       <Navigation />
