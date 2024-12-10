@@ -27,4 +27,3 @@
 **Contributing:**
 
 We welcome contributions from passionate music lovers! Feel free to reach out with any ideas, feedback, or feature requests. 
-
