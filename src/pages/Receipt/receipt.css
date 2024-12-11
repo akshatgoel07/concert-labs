@@ -19,7 +19,7 @@
     color: #404041;
     font-weight: 600;
     text-align: center;
-    font-size: 42px;
+    font-size: 18px;
 }
 
 .dotted_data {
@@ -46,21 +46,20 @@
 .ticket__artist-name {
     font-family: "IBM Plex Mono", monospace;
     color: #404041;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 
 .ticket__artists-grid {
     display: grid;
     grid-template-columns: repeat(1, 5fr);
-    margin-top: 10px;
-    gap: 10px;
+    margin-top: 2px;
 }
 
 .ticket__artist-item {
-
     display: flex;
-    gap: 45px;
+    align-items: baseline;
+    /* grid-template-columns: 10% 70% 20%; */
 }
 
 .items {
@@ -87,25 +86,69 @@
 }
 
 .cardHolder {
-    text-transform: uppercase;
     display: flex;
     font-weight: 300;
     gap: 2px;
-}
+    margin-top: 2px;
 
+}
+.cardHolder p{
+    font-family: "IBM Plex Mono", monospace;
+    color: #000000;
+    font-size: 12px;
+}
 .bottom p {
     font-family: "IBM Plex Mono", monospace;
     color: #000000;
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .bottom {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 30px 20px 10px 20px;
+justify-content: center;
+align-items: centers;
+
+
 }
 
 .link a {
     text-decoration: none;
+}
+.ticket__artist-item {
+    display: flex;
+    /* justify-content: space-between */
+    padding: 4px 0;
+    /* border-bottom: 1px dotted #ccc; */
+;
+    
+}
+
+.ticket__artist-duration {
+    font-size: 14px;
+    color: #666;
+}
+
+.ticket__artist-item {
+    display: grid;
+    grid-template-columns: 10% 70% 20%; /* Rank | Name | Duration */
+    align-items: center;
+    font-size: 0.9rem; /* Smaller text */
+    margin: 0.2rem 0; /* Space between rows */
+    gap: 0.5rem; /* Add spacing between columns */
+}
+
+.ticket__artist-rank {
+    text-align: left; /* Rank column alignment */
+    font-weight: bold;
+}
+
+.ticket__artist-name {
+    text-align: left; /* Name column alignment */
+    overflow-wrap: break-word; /* Prevent long text overflow */
+}
+
+.ticket__artist-duration {
+    text-align: right; /* Duration column alignment */
+    font-family: monospace; /* Optional: distinct duration style */
 }

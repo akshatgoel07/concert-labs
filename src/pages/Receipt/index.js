@@ -18,29 +18,30 @@ const TopArt = () => {
     const [artists, setArtists] = useState([]);
     const [token, setToken] = useState(null);
     const [userName, setUserName] = useState("Mysterious?");
-    const name = localStorage.getItem("concertLabsUsername");
-
+    // const name = localStorage.getItem("concertLabsUsername");
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const profileData = await fetchProfile(token);
-                const artistNames = await fetchTopArtists(token);
-                setArtists(artistNames);
+                const tracks = await fetchTopTracks(token);
+                setArtists(tracks); // Now, 'artists' will hold track data
+                console.log(tracks, "a;skdjfhaskdfh");
                 setUserName(profileData.display_name);
             } catch (error) {
                 console.error(error);
             }
         };
+
         const getToken = () => {
             if (!token) {
-                var urlParams = new URLSearchParams(
+                const urlParams = new URLSearchParams(
                     window.location.hash.substring(1)
                 );
-                setToken(urlParams.get("access_token"));
-                console.log(token);
+                const accessToken = urlParams.get("access_token");
+                setToken(accessToken);
             }
-            console.log(token);
         };
+
         getToken();
         if (token) {
             fetchData();
@@ -74,7 +75,7 @@ const TopArt = () => {
 
     async function fetchTopArtists(token) {
         const response = await fetch(
-            "https://api.spotify.com/v1/me/top/artists",
+            "https://api.spotify.com/v1/me/top/tracks",
             {
                 headers: {
                     Authorization: "Bearer " + token,
@@ -89,6 +90,33 @@ const TopArt = () => {
         const data = await response.json();
         return data?.items?.map((artist) => artist.name) || [];
     }
+    async function fetchTopTracks(token) {
+        const response = await fetch(
+            "https://api.spotify.com/v1/me/top/tracks",
+            {
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+            }
+        );
+        if (response.status === 401) {
+            localStorage.removeItem("spotifyToken");
+            throw new Error("Failed to fetch top tracks");
+        }
+        const data = await response.json();
+        return (
+            data?.items?.map((track) => ({
+                name: track.name,
+                artist: track.artists.map((artist) => artist.name).join(", "),
+                duration: track.duration_ms,
+            })) || []
+        );
+    }
+    function formatDuration(ms) {
+        const minutes = Math.floor(ms / 60000);
+        const seconds = Math.floor((ms % 60000) / 1000);
+        return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    }
 
     return (
         <div className="receipt">
@@ -99,6 +127,10 @@ const TopArt = () => {
                     style={{ backgroundImage: `url(${BackGroundImg})` }}
                 >
                     <div className="ticket__top-heading">CONCERT PASS</div>
+                    <div className="cardHolder">
+                        <p>Card Holder: </p>
+                        <p>{userName}</p>
+                    </div>
                     <div className="dotted_data">
                         <div className="date_data">
                             <div className="date_data-img"></div>
@@ -119,26 +151,57 @@ const TopArt = () => {
                         </div>
                         <div className="ticket__artists-grid">
                             {artists.length > 0 ? (
-                                artists
-                                    .slice(0, 10)
-                                    .map((artistName, index) => (
+                                artists.slice(0, 10).map((artist, index) => {
+                                    const minutes = Math.floor(
+                                        artist.duration / 60000
+                                    );
+                                    const seconds = Math.floor(
+                                        (artist.duration % 60000) / 1000
+                                    )
+                                        .toString()
+                                        .padStart(2, "0");
+
+                                    return (
                                         <div
-                                            key={artistName}
+                                            key={artist.name}
                                             className="ticket__artist-item"
                                         >
                                             <div className="ticket__artist-rank">
                                                 {index + 1}
-                                            </div>{" "}
+                                            </div>
                                             <div className="ticket__artist-name">
-                                                {artistName}
-                                            </div>{" "}
+                                                {artist.name} - {artist.artist}
+                                            </div>
+                                            <div className="ticket__artist-duration">
+                                                {minutes}:{seconds}
+                                            </div>
                                         </div>
-                                    ))
+                                    );
+                                })
                             ) : (
                                 <div className="no-artists-message">
-                                    Let me cook up some artists for you!
+                                    Let me cook up some songs for you!
                                 </div>
                             )}
+                        </div>
+
+                        <div className="bottom_details">
+                            <div className="item-count">
+                                <p>ITEM COUNT:</p>
+                                <p>{artists.length}</p>
+                            </div>
+                            <div className="total">
+                                <p>TOTAL:</p>
+                                <p>
+                                    {formatDuration(
+                                        artists.reduce(
+                                            (total, track) =>
+                                                total + track.duration,
+                                            0
+                                        )
+                                    )}
+                                </p>
+                            </div>
                         </div>
                     </div>
                     <img src={DottedLine} alt="a dotted line" />
@@ -155,20 +218,21 @@ const TopArt = () => {
 
                     <img src={DottedLine} alt="a dotted line" />
                     <div className="bottom">
-                        <div className="cardHolder">
+                        {/* <div className="cardHolder">
                             <img src={music} alt="" />
                             <p>Card Holder: </p>
                             <p>{userName}</p>
-                        </div>
-                        <div className="barcode">
+                        </div> */}
+                        {/* <div className="barcode">
                             <img src={Barcode} alt="" />
-                        </div>
+                        </div> */}
+                        <p>create your own @</p>
                         <div className="link">
                             <a
                                 href=" https://concert-labs.vercel.app/"
                                 target="_blank"
                             >
-                                <p>https://concert-labs.vercel.app/ </p>
+                                <p>https://concert-labs.vercel.app/</p>
                             </a>
                         </div>
                     </div>
@@ -179,10 +243,10 @@ const TopArt = () => {
                     <img src={Arrow} alt="" />
                     <p>Download</p>
                 </button>
-                <button type="button" onClick={() => {}}>
+                {/* <button type="button" onClick={() => {}}>
                     <img src={Arrow} alt="" />
                     <p>Share</p>
-                </button>
+                </button> */}
             </div>
             <Footer />
         </div>

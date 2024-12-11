@@ -1,17 +1,8 @@
 export const fetchSpotifyAuthorizationUrl = () => {
-    // my keys expired?
-    const clientId = "1620b101ae454685837ad774b688cb24";
-    const redirectUrl = "https://concert-labs.vercel.app/Receipt";
-    const apiUrl = "https://accounts.spotify.com/authorize";
-    const scope = [
-        // "user-read-private",
-        // "user-read-email",
-        // "user-modify-playback-state",
-        // "user-read-playback-state",
-        // "user-read-currently-playing",
-        // "user-read-recently-played",
-        "user-top-read",
-    ];
+    const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
+    const redirectUrl = process.env.REACT_APP_SPOTIFY_REDIRECT_URL;
+    const apiUrl = process.env.REACT_APP_SPOTIFY_API_URL;
+    const scope = ["user-top-read"];
 
     return `${apiUrl}?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=${scope.join(
         " "
