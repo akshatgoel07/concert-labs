@@ -1,7 +1,7 @@
 export const fetchSpotifyAuthorizationUrl = () => {
     // my keys expired?
     const clientId = "1620b101ae454685837ad774b688cb24";
-    const redirectUrl = "http://localhost:3000/Receipt";
+    const redirectUrl = "https://concert-labs.vercel.app/Receipt";
     const apiUrl = "https://accounts.spotify.com/authorize";
     const scope = [
         // "user-read-private",
